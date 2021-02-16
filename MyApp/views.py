@@ -13,7 +13,7 @@ def welcome(request):
     return render(request,'welcome.html')
 
 #控制不同页面返回不同数据:数据分发器
-def child_json(eid):
+def child_json(eid,oid=''):
     """
     child_json()  它专门用来接收页面名字，然后去不同的数据库中查找数据，
     进行整理后 返回给child()函数，再由child函数返回给前端浏览器
@@ -29,6 +29,10 @@ def child_json(eid):
         data = DB_project.objects.all()
         res = {'projects':data}
 
+    if eid=='P_apis.html':
+        project_name = DB_project.objects.filter(id=oid)[0].name
+        res = {'project_name':project_name}
+
     return res
 
  # 返回子页面
@@ -42,7 +46,7 @@ def child(request,eid,oid):
     :param oid:
     :return:
     """
-    res = child_json(eid)
+    res = child_json(eid,oid)
 
     return render(request,eid,res)
 
@@ -170,3 +174,30 @@ def add_project(request):
     project_name=request.GET['project_name']
     DB_project.objects.create(name=project_name,remark='',user=request.user,other_user='')
     return HttpResponse('')
+
+def open_apis(request,id):
+    """
+
+    :param request:
+    :return:
+    """
+    project_id = id
+    return render(request,'welcome.html',{'whichHTML':'P_apis.html','oid':project_id})
+
+def open_cases(request):
+    """
+
+    :param request:
+    :return:
+    """
+    project_id = id
+    return render(request, 'welcome.html', {'whichHTML': 'P_cases.html', 'oid': ''})
+
+def open_project_set(request):
+    """
+
+    :param request:
+    :return:
+    """
+    project_id = id
+    return render(request, 'welcome.html', {'whichHTML': 'P_project_set.html', 'oid': ''})

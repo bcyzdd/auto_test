@@ -31,7 +31,7 @@
                 <td>{{ i.name }}</td>
                 <td>{{ i.user }}</td>
                 <td>{{ i.remark }}</td>
-                <td><button class="btn btn-success">进入</button><button onclick="delete_project('{{ i.id }}')" class="btn btn-danger">删除</button></td>
+                <td><button onclick="javascript:document.location.href='/apis/{{ i.id }}/'" class="btn btn-success">进入</button><button onclick="delete_project('{{ i.id }}')" class="btn btn-danger">删除</button></td>
 
             </tr>
             {% endfor %}
