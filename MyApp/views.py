@@ -142,3 +142,18 @@ def project_list(request):
     :return:
     """
     return render(request, 'welcome.html', {'whichHTML': 'project_list.html', 'oid': ''})
+
+def delete_project(request):
+    """
+    删除项目
+    1、获取传过来的参数项目id
+    2、去数据库的项目表 中删除掉这个id的项目
+    3、随便返回个空字符串给前端
+    :param request:
+    :return:
+    """
+    id = request.GET['id']
+
+    DB_project.objects.filter(id=id).delete()
+
+    return HttpResponse('')

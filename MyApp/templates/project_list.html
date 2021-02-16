@@ -31,12 +31,23 @@
                 <td>{{ i.name }}</td>
                 <td>{{ i.user }}</td>
                 <td>{{ i.remark }}</td>
-                <td><button class="btn btn-success">进入</button><button class="btn btn-danger">删除</button></td>
+                <td><button class="btn btn-success">进入</button><button onclick="delete_project('{{ i.id }}')" class="btn btn-danger">删除</button></td>
 
             </tr>
             {% endfor %}
             </tbody>
         </table>
+    <script>
+        function delete_project(id) {
+            {# 删除选中的项目 #}
+            if(confirm('确定删除该项目吗？')==false){return}
+            $.get('/delete_project/',{
+                'id':id
+            },function (ret) {
+                document.location.reload()
+            })
+        }
+    </script>
 
 </body>
 </html>
