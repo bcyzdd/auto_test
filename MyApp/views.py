@@ -12,6 +12,16 @@ def welcome(request):
     # return HttpResponse('欢迎来到我的测试平台')
     return render(request,'welcome.html')
 
+#控制不同页面返回不同数据:数据分发器
+def child_json(eid):
+
+    if eid == 'home.html':
+        data = DB_home_href.objects.all()
+
+        res = {"hrefs": data}
+
+        return res
+
  # 返回子页面
 def child(request,eid,oid):
     """
@@ -19,11 +29,13 @@ def child(request,eid,oid):
     也就是我们welcome.html中的{{ whichHTML }} ，
     也就是我们后台函数返回的子页面html的真实名字
     :param request:
-    :param eid:
+    :param eid: 进入的html文件名
     :param oid:
     :return:
     """
-    return render(request,eid)
+    res = child_json(eid)
+
+    return render(request,eid,res)
 
 
 def home(request):

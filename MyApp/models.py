@@ -28,7 +28,7 @@ class DB_tucao(models.Model):
         return self.text+str(self.ctime)
 
 
-class DB_home(models.Model):
+class DB_home_href(models.Model):
     """
     存储连接入口
     """
