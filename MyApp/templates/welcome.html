@@ -97,5 +97,12 @@
     <script>
         $('#page1').load('/child/'+'{{ whichHTML }}/{{ oid }}/')
     </script>
+
+    <script>
+        if("{{ whichHTML }}" !='home.html'){
+            document.getElementById('menu_btn').click();
+        }
+
+    </script>
 </body>
 </html>
