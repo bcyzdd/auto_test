@@ -38,3 +38,12 @@ class DB_home_href(models.Model):
 
     def __str__(self):
         return self.name
+
+class DB_project(models.Model):
+    name = models.CharField(max_length=100,null=True) # 项目名称
+    remark = models.CharField(max_length=1000,null=True) # 项目备注
+    user = models.CharField(max_length=15,null=True) # 项目创建者
+    other_user = models.CharField(max_length=200,null=True)# 项目其他创建者
+
+    def __str__(self):
+        return self.name

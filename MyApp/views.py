@@ -20,6 +20,7 @@ def child_json(eid):
     :param eid:
     :return:
     """
+    res = {}
     if eid == 'home.html':
         data = DB_home_href.objects.all()
 
