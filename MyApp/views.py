@@ -157,3 +157,16 @@ def delete_project(request):
     DB_project.objects.filter(id=id).delete()
 
     return HttpResponse('')
+
+def add_project(request):
+    """
+    新增项目
+    1、接收project_name
+    2、去项目表新建项目
+    3、返回给前端一个空证明已经成功完成
+    :param request:
+    :return:
+    """
+    project_name=request.GET['project_name']
+    DB_project.objects.create(name=project_name,remark='',user=request.user,other_user='')
+    return HttpResponse('')
