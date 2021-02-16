@@ -219,7 +219,7 @@ def save_project_set(request,id):
     remark = request.GET['remark']
     other_user = request.GET['other_user']
 
-    DB_project.objects.filter(id=project_id).union(name=name,remark=remark,other_user=other_user)
+    DB_project.objects.filter(id=project_id).update(name=name,remark=remark,other_user=other_user)
 
     return HttpResponse('')
 
