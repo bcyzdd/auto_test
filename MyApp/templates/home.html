@@ -14,8 +14,8 @@
     <div style="text-align: center">
         <h1>欢迎{{ username }} 使用接口测试平台</h1>
         {# 中间这里要放 超链接传送门 #}
-        <div style="color: #f00dea;text-align: left;margin-left: 300px">
-            <h3>欢迎使用传送门：</h3>
+        <div style="border: 1px solid black;border-radius: 10px 0px 0px 10px;text-align: center;background-color: #e3ffe3;opacity: 0.8;color: white;margin-left: 300px">
+            <h3 style="color: #3e2935">欢迎使用传送门：</h3>
             <strong>
                 {% for i in hrefs %}
                     <a href="{{ i.href }}">{{ i.name }}</a><br>
@@ -24,8 +24,28 @@
             </strong>
         </div>
         {# 中间这里要放 超链接传送门 #}
-        <div style="position: absolute;bottom: 5px;right: 5px">
-            <textarea name="" id="tucao_input" cols="50" rows="10"
+        <br>
+        <div style="border: 1px solid black;border-radius: 10px 0px 0px 10px;text-align: center;background-color: #e3ffe3;opacity: 0.8;color: white;margin-left: 300px">
+            <h3 style="color: #3e2935">您的项目：</h3>
+            <span style="color: black">
+                {# 这里存放后续的个人项目列表循环，类似传送门，点击自己创建的项目可以直接跳转过去 #}
+            </span>
+            <br>
+
+        </div>
+
+        <br>
+        <div style="border: 1px solid black;border-radius: 10px 0px 0px 10px;text-align: center;background-color: #e3ffe3;opacity: 0.8;color: white;margin-left: 300px">
+            <h3 style="color: #3e2935">最新消息：</h3>
+            <span style="color: black">
+                帮助页面上线；<br>
+                后台开启，仅限有权限同学使用；<br>
+                项目列表上线，您现在可以进入所有项目了；<br>
+            </span>
+        </div>
+        <br>
+        <div style="border: 1px solid black;border-radius: 10px 0px 0px 10px;text-align: center;background-color: #e3ffe3;opacity: 0.8;color: white;margin-left: 300px">
+            <textarea name="" id="tucao_input" cols="50" rows="5"
                   style="border-radius: 5px;padding-left: 10px;box-shadow: 4px 4px 9px grey"
                   placeholder="匿名吐槽专用，点击 呸 按钮即可怒喷开发者！"
         ></textarea>

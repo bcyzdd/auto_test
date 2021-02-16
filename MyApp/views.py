@@ -14,7 +14,12 @@ def welcome(request):
 
 #控制不同页面返回不同数据:数据分发器
 def child_json(eid):
-
+    """
+    child_json()  它专门用来接收页面名字，然后去不同的数据库中查找数据，
+    进行整理后 返回给child()函数，再由child函数返回给前端浏览器
+    :param eid:
+    :return:
+    """
     if eid == 'home.html':
         data = DB_home_href.objects.all()
 
