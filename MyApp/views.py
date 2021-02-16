@@ -2,6 +2,8 @@ from django.shortcuts import render,HttpResponse,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
+from MyApp.models import *
+
 # Create your views here.
 
 
@@ -101,3 +103,5 @@ def pei(request):
     :return:
     """
     tucao_text = request.GET['tocao_text']
+    DB_tucao.objects.create(user=request.user.username,text=tucao_text)
+    return HttpResponse('')
