@@ -26,3 +26,15 @@ class DB_tucao(models.Model):
         :return:
         """
         return self.text+str(self.ctime)
+
+
+class DB_home(models.Model):
+    """
+    存储连接入口
+    """
+
+    name = models.CharField(max_length=30,null=True) # 超链接名字
+    href = models.CharField(max_length=2000,null=True) # 超链接内容
+
+    def __str__(self):
+        return self.name
