@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e4066615-b491-4f1b-b4b3-aaad49f2700a" name="Default" comment="新增表 DB_home，models 新增类 admin注册 ，makemigrations migrate 同步表结构并生效">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/markdown-navigator.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="e4066615-b491-4f1b-b4b3-aaad49f2700a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyApp/admin.py" afterPath="$PROJECT_DIR$/MyApp/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyApp/models.py" afterPath="$PROJECT_DIR$/MyApp/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyApp/templates/home.html" afterPath="$PROJECT_DIR$/MyApp/templates/home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyApp/views.py" afterPath="$PROJECT_DIR$/MyApp/views.py" />
     </list>
     <ignored path="auto_test.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -55,7 +49,7 @@
         <entry file="file://$PROJECT_DIR$/MyApp/templates/home.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
-              <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#textarea#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -668,7 +662,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613462502316</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="home.html 修改吐槽输入框位置">
+      <created>1613463768252</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1613463768252</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -734,7 +735,8 @@
     <MESSAGE value="welcome改造，home页面是展示菜单，其他页面隐藏菜单" />
     <MESSAGE value="home，默认展示项目列表，点击其他tab展示对应内容" />
     <MESSAGE value="新增表 DB_home，models 新增类 admin注册 ，makemigrations migrate 同步表结构并生效" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增表 DB_home，models 新增类 admin注册 ，makemigrations migrate 同步表结构并生效" />
+    <MESSAGE value="home.html 修改吐槽输入框位置" />
+    <option name="LAST_COMMIT_MESSAGE" value="home.html 修改吐槽输入框位置" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -857,7 +859,7 @@
     <entry file="file://$PROJECT_DIR$/MyApp/templates/home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#textarea#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
