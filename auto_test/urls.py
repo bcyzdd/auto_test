@@ -27,7 +27,8 @@ urlpatterns = [
     url(r'^login/$', login),# 登陆
     url(r'^login_action/$', login_action),# 登陆
     url(r'^register_action/$', register_action),# 注册
-    url(r'logout/$', logout),# 登录
+    url(r'logout/$', logout),# 推出
+    url(r'pei/$', pei),# 推出
 
 
 ]
