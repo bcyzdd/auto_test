@@ -36,6 +36,7 @@ urlpatterns = [
     url(r'^apis/(?P<id>.*)/$', open_apis),# 进入接口库
     url(r'^cases/(?P<id>.*)/$', open_cases),# 进入用例设置
     url(r'^project_set/(?P<id>.*)/$', open_project_set),# 进入项目设置
+    url(r'^save_project_set/(?P<id>.*)/$', save_project_set),# 保存项目设置
 
 
 

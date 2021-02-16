@@ -31,13 +31,13 @@ def child_json(eid,oid=''):
 
     if eid=='P_apis.html':
         project = DB_project.objects.filter(id=oid)[0]
-        res = {'project_name':project}
+        res = {'project':project}
     if eid=='P_cases.html':
         project = DB_project.objects.filter(id=oid)[0]
-        res = {'project_name':project}
+        res = {'project':project}
     if eid=='P_project_set.html':
         project = DB_project.objects.filter(id=oid)[0]
-        res = {'project_name':project}
+        res = {'project':project}
 
     return res
 
@@ -207,3 +207,19 @@ def open_project_set(request,id):
     """
     project_id = id
     return render(request, 'welcome.html', {'whichHTML': 'P_project_set.html', 'oid': project_id})
+
+def save_project_set(request,id):
+    """
+
+    :param request:
+    :return:
+    """
+    project_id = id
+    name = request.GET['name']
+    remark = request.GET['remark']
+    other_user = request.GET['other_user']
+
+    DB_project.objects.filter(id=project_id).union(name=name,remark=remark,other_user=other_user)
+
+    return HttpResponse('')
+
