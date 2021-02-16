@@ -21,12 +21,15 @@ def child_json(eid):
     :return:
     """
     res = {}
-    if eid == 'home.html':
+    if eid == 'home.html': #首页的超链接
         data = DB_home_href.objects.all()
-
         res = {"hrefs": data}
 
-        return res
+    if eid == 'project_list.html': # 首页的项目列表
+        data = DB_project.objects.all()
+        res = {'projects':data}
+
+    return res
 
  # 返回子页面
 def child(request,eid,oid):
@@ -131,3 +134,11 @@ def api_help(request):
     :return:
     """
     return render(request,'welcome.html',{'whichHTML':'help.html','oid':''})
+
+def project_list(request):
+    """
+    进入项目列表
+    :param request:
+    :return:
+    """
+    return render(request, 'welcome.html', {'whichHTML': 'project_list.html', 'oid': ''})

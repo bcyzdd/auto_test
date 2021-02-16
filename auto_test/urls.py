@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'logout/$', logout),# 推出
     url(r'pei/$', pei),# 吐槽
     url(r'^help/$', api_help),# 帮助文档
+    url(r'^project_list/$', project_list),# 进入项目列表
 
 
 
