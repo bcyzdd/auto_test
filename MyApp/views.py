@@ -30,8 +30,14 @@ def child_json(eid,oid=''):
         res = {'projects':data}
 
     if eid=='P_apis.html':
-        project_name = DB_project.objects.filter(id=oid)[0].name
-        res = {'project_name':project_name}
+        project = DB_project.objects.filter(id=oid)[0]
+        res = {'project_name':project}
+    if eid=='P_cases.html':
+        project = DB_project.objects.filter(id=oid)[0]
+        res = {'project_name':project}
+    if eid=='P_project_set.html':
+        project = DB_project.objects.filter(id=oid)[0]
+        res = {'project_name':project}
 
     return res
 
@@ -184,20 +190,20 @@ def open_apis(request,id):
     project_id = id
     return render(request,'welcome.html',{'whichHTML':'P_apis.html','oid':project_id})
 
-def open_cases(request):
+def open_cases(request,id):
     """
 
     :param request:
     :return:
     """
     project_id = id
-    return render(request, 'welcome.html', {'whichHTML': 'P_cases.html', 'oid': ''})
+    return render(request, 'welcome.html', {'whichHTML': 'P_cases.html', 'oid': project_id})
 
-def open_project_set(request):
+def open_project_set(request,id):
     """
 
     :param request:
     :return:
     """
     project_id = id
-    return render(request, 'welcome.html', {'whichHTML': 'P_project_set.html', 'oid': ''})
+    return render(request, 'welcome.html', {'whichHTML': 'P_project_set.html', 'oid': project_id})
