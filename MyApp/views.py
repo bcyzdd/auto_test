@@ -224,3 +224,24 @@ def save_project_set(request,id):
 
     return HttpResponse('')
 
+def project_api_add(request,Pid):
+    """
+    保存新增接口
+    :param request:
+    :return:
+    """
+    project_id = Pid
+    DB_apis.objects.create(project_id=project_id)
+    return HttpResponseRedirect('/apis/%s/'%project_id)
+
+def project_api_del(request,id):
+    """
+    删除api
+    :param request:
+    :param id:
+    :return:
+    """
+    project_id = DB_apis.objects.filter(id=id)[0].project_id
+    DB_apis.objects.filter(id=id).delete()
+
+    return HttpResponseRedirect('/apis/%s/'%project_id)
