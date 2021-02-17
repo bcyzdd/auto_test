@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .wqrf_button{
+            background-color: #0fd1ab;
+            border-radius: 5px;
+            border: 1px solid #353C48;
+            box-shadow: 4px 4px 4px grey;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-default" role="navigation" style="position: absolute;top: 0px;left: 80px;width:-webkit-calc(100% - 200px);z-index: 1">
@@ -20,5 +28,45 @@
     </div>
     </div>
 </nav>
+    <br>
+    <br>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th style="width: 40%">接口名称</th>
+                <th style="width: 20%">url</th>
+                <th style="width: 350px">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in apis %}
+            <tr>
+                <td>{{ i.id }}</td>
+                <td>{{ i.name }}</td>
+                <td>{{ i.api_url }}</td>
+                <td>
+                    <button onclick="" class="btn btn-success">调试</button>
+                    <button class="wqrf_button">备注</button>
+                    <button class="wqrf_button">复制</button>
+                    <button class="wqrf_button">异常值测试</button>
+                    <button onclick="" class="btn btn-danger">删除</button>
+                </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div style="position: fixed;bottom: 0px;width: 100%;background-color: #f8f8f8;text-align: center;border: 1px solid #e7e7e7">
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary">新增接口</button>
+            <button type="button" class="btn btn-default">全局请求头</button>
+            <button type="button" class="btn btn-default">全局域名</button>
+            <button type="button" class="btn btn-default">接口文档导入</button>
+            <button type="button" class="btn btn-default">抓包导入</button>
+            <button type="button" class="btn btn-default">加密算法</button>
+            <button type="button" class="btn btn-default">登录态接口</button>
+        </div>
+    </div>
 </body>
 </html>

@@ -47,3 +47,24 @@ class DB_project(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class DB_apis(models.Model):
+    project_id= models.CharField(max_length=10,null=True) # 项目id
+    name= models.CharField(max_length=100,null=True) # 接口名称
+    api_method= models.CharField(max_length=10,null=True) # 接口请求方式
+    api_url= models.CharField(max_length=1000,null=True) # 接口url
+    api_header= models.CharField(max_length=1000,null=True) # 请求头
+    api_login= models.CharField(max_length=10,null=True) # 是否带登录态
+    api_host= models.CharField(max_length=100,null=True)# 域名
+    desc= models.CharField(max_length=100,null=True)# 接口描述
+    body_method= models.CharField(max_length=20,null=True) # 请求体编码
+    api_body= models.CharField(max_length=1000,null=True) # 请求体
+    result= models.TextField(max_length=1000,null=True)# 返回体
+    sign= models.CharField(max_length=1000,null=True)# 是否验签
+    file_key= models.CharField(max_length=1000,null=True)# 文件key
+    file_name= models.CharField(max_length=1000,null=True)# 文件名
+    public_header= models.CharField(max_length=1000,null=True)# 全局变量-请求头
+
+    def __str__(self):
+        return self.name
