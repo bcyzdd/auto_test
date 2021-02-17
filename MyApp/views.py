@@ -245,3 +245,23 @@ def project_api_del(request,id):
     DB_apis.objects.filter(id=id).delete()
 
     return HttpResponseRedirect('/apis/%s/'%project_id)
+def save_bz(request):
+    """
+    保存备注
+    :param request:
+    :return:
+    """
+    api_id = request.GET['api_id']
+    bz_value = request.GET['bz_value']
+    DB_apis.objects.filter(id=api_id).update(desc=bz_value)
+    return HttpResponse('')
+
+def get_bz(request):
+    """
+    获取备注
+    :param request:
+    :return:
+    """
+    api_id = request.GET['api_id']
+    bz_value = DB_apis.objects.filter(id=api_id)[0].desc
+    return HttpResponse(bz_value)
