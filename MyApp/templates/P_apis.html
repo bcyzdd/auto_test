@@ -101,5 +101,49 @@
             document.getElementById('bz').style.display='none';
         }
     </script>
+    <div id="ts" style="border-radius: 5px;width: 80%;height: 80%;position: fixed;left: 10%;background-color: #3c4043;box-shadow: 4px 4px 8px grey;
+color: white;padding-left: 10px">
+        <div class="btn-group" style="float: right">
+            <button type="button" class="btn btn-success">保存</button>
+            <button type="button" class="btn btn-default">取消</button>
+        </div>
+        <h3>接口：<small></small> <small></small></h3>
+        <ul class="nav navbar-nav" style="width: 98%">
+            <li>
+                <select style="height: 40px;" class="form-control">
+                    <option value="none">请求方式</option>
+                    <option value="post">POST</option>
+                    <option value="get">GET</option>
+                    <option value="put">PUT</option>
+                    <option value="delete">DELETE</option>
+                </select>
+            </li><li style="width: -webkit-calc(100% - 225px)">
+                <input style="padding-left: 10px;width: 100%;height: 40px;" type="text" placeholder="url:如 /abcd/efg" value="">
+            </li>
+            <li>
+                <button type="button" style="height: 40px;width: 120px" class="btn btn-default"><span style="font-size: large">Send</span></button>
+            </li>
+        </ul>
+        <br>
+        <br>
+        <br>
+        <ul class="nav navbar-nav" style="width: 98%">
+            <li style="width: -webkit-calc(100% - 63px)"><input style="padding-left: 10px;width: 100%;height: 40px;" type="text" placeholder="host : 如 http(s)://www.ccc.com" value=""></li><li>
+            <button type="button" style="height: 40px;width: 60px" class="btn btn-default"><span>Clear</span></button>
+        </li>
+        </ul>
+        <br>
+        <br>
+        <br>
+        <ul class="nav navbar-nav" style="width: 98%">
+            <li style="width:  -webkit-calc(100% - 63px)">
+                <input style="padding-left: 10px;width: 100%;height: 40px;" type="text" placeholder="header请求头 : 如 {'Content':'application/json'}" value="">
+            </li>
+            <li>
+                 <button type="button" style="height: 40px;width: 60px" class="btn btn-default"><span>Clear</span></button>
+
+            </li>
+        </ul>
+    </div>
 </body>
 </html>
