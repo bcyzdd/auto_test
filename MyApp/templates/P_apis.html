@@ -46,7 +46,7 @@
                 <td>{{ i.name }}</td>
                 <td>{{ i.api_url }}</td>
                 <td>
-                    <button onclick="" class="btn btn-success">调试</button>
+                    <button onclick="ts_show('{{ i.id }}','{{ i.name }}')" class="btn btn-success">调试</button>
                     <button onclick="open_bz('{{ i.id }}')" class="wqrf_button">备注</button>
                     <button class="wqrf_button">复制</button>
                     <button class="wqrf_button">异常值测试</button>
@@ -103,13 +103,13 @@
         }
     </script>
     {# 调试弹窗及函数 #}
-    <div id="ts" style="border-radius: 5px;width: 80%;position: fixed;left: 10%;background-color: #3c4043;box-shadow: 4px 4px 8px grey;
+    <div id="ts" style="display: none;border-radius: 5px;width: 80%;position: fixed;left: 10%;background-color: #3c4043;box-shadow: 4px 4px 8px grey;
 color: white;padding-left: 10px">
         <div class="btn-group" style="float: right">
             <button onclick="ts_save()" type="button" class="btn btn-success">保存</button>
             <button onclick="ts_close()" type="button" class="btn btn-default">取消</button>
         </div>
-        <h3>接口：<small></small> <small></small></h3>
+        <h3>接口：<small style="color: greenyellow" id="ts_api_id"></small>-<small style="color: greenyellow" id="ts_api_name"></small></h3>
         <ul class="nav navbar-nav" style="width: 98%">
             <li>
                 <select id="ts_method" style="height: 40px;" class="form-control">
@@ -234,19 +234,19 @@ color: white;padding-left: 10px">
                 </script>
             </div>
             <div class="tab-pane fade" id="Text">
-                <textarea name="" id="" style="color: black;width: 98%;height: 300px"></textarea>
+                <textarea name="" id="raw_Text" style="color: black;width: 98%;height: 300px"></textarea>
             </div>
             <div class="tab-pane fade" id="JavaScript">
-                <textarea name="" id="" style="color: black;width: 98%;height: 300px"></textarea>
+                <textarea name="" id="raw_JavaScript" style="color: black;width: 98%;height: 300px"></textarea>
             </div>
             <div class="tab-pane fade" id="Json">
-                <textarea name="" id="" style="color: black;width: 98%;height: 300px"></textarea>
+                <textarea name="" id="raw_Json" style="color: black;width: 98%;height: 300px"></textarea>
             </div>
             <div class="tab-pane fade" id="Html">
-                <textarea name="" id="" style="color: black;width: 98%;height: 300px"></textarea>
+                <textarea name="" id="raw_Html" style="color: black;width: 98%;height: 300px"></textarea>
             </div>
             <div class="tab-pane fade" id="Xml">
-                <textarea name="" id="" style="color: black;width: 98%;height: 300px"></textarea>
+                <textarea name="" id="raw_Xmlg" style="color: black;width: 98%;height: 300px"></textarea>
             </div>
             <div class="tab-pane fade" id="response">
                 <textarea name="" id="" disabled="disabled" style="color: black;width: 98%;height: 300px;"></textarea>
@@ -255,6 +255,11 @@ color: white;padding-left: 10px">
         <br>
     </div>
     <script>
+        function ts_show(id,name) {
+            document.getElementById('ts').style.display='block';
+            document.getElementById('ts_api_id').innerText=id;
+            document.getElementById('ts_api_name').innerText=name;
+        }
         function ts_close() {
             document.getElementById('ts').style.display='none';
         }
@@ -285,6 +290,36 @@ color: white;padding-left: 10px">
                 console.log(ts_api_body)
 
             }
+            if(ts_body_method=='x-www-form-urlencoded'){
+                var ts_api_body=[];
+                var tbody_ = $('table#mytable2 tbody')[0] //获取该表格内容
+                var trlist = tbody_.children;
+                for(var i=0;i<trlist.length;i++){
+                    var tdarr = trlist[i].children;
+                    var key = tdarr[0].innerText;
+                    var value = tdarr[1].innerText;
+                    ts_api_body.push([key,value])
+                }
+
+                console.log(ts_api_body)
+
+            }
+            if(ts_body_method=='Text'){
+                var ts_api_body=document.getElementById('raw_Text').value;
+            }
+            if(ts_body_method=='JavaScript'){
+                var ts_api_body=document.getElementById('raw_JavaScript').value;
+            }
+            if(ts_body_method=='Json'){
+                var ts_api_body=document.getElementById('raw_Json').value;
+            }
+            if(ts_body_method=='Html'){
+                var ts_api_body=document.getElementById('raw_Html').value;
+            }
+            if(ts_body_method=='Xml'){
+                var ts_api_body=document.getElementById('raw_Xml').value;
+            }
+
         }
     </script>
 </body>
