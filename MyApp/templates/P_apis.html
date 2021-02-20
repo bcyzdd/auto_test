@@ -152,7 +152,7 @@ color: white;padding-left: 10px">
         <br>
         <ul id="myTab" class="nav nav-tabs">
             <li class="active">
-                <a href="#none" data-toggle="tab">none</a>
+                <a id="click_none" href="#none" data-toggle="tab">none</a>
             </li>
             <li><a href="#form-data" data-toggle="tab">form-data</a></li>
             <li><a href="#x-www-form-urlencoded" data-toggle="tab">x-www-form-urlencoded</a></li>
@@ -182,14 +182,10 @@ color: white;padding-left: 10px">
                             <td style="width: 50%">Value</td>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="mytbody">
                           <tr>
-                            <td>Username</td>
-                            <td>wqrf</td>
-                          </tr>
-                            <tr>
-                            <td>Password</td>
-                            <td>123456</td>
+                            <td></td>
+                            <td></td>
                           </tr>
                         </tbody>
                     </table>
@@ -212,15 +208,12 @@ color: white;padding-left: 10px">
                             <td style="width: 50%">Value</td>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="mytbody2">
                           <tr>
-                            <td>Username</td>
-                            <td>wqrf</td>
+                            <td></td>
+                            <td></td>
                           </tr>
-                            <tr>
-                            <td>Password</td>
-                            <td>123456</td>
-                          </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -246,16 +239,38 @@ color: white;padding-left: 10px">
                 <textarea name="" id="raw_Html" style="color: black;width: 98%;height: 300px"></textarea>
             </div>
             <div class="tab-pane fade" id="Xml">
-                <textarea name="" id="raw_Xmlg" style="color: black;width: 98%;height: 300px"></textarea>
+                <textarea name="" id="raw_Xml" style="color: black;width: 98%;height: 300px"></textarea>
             </div>
             <div class="tab-pane fade" id="response">
-                <textarea name="" id="" disabled="disabled" style="color: black;width: 98%;height: 300px;"></textarea>
+                <textarea name="" id="ts_response_body" disabled="disabled" style="color: black;width: 98%;height: 300px;"></textarea>
             </div>
         </div>
         <br>
     </div>
     <script>
+        function clear_ts_api() {
+            //初始化清空调试弹窗输入框内的值
+            document.getElementById('ts_api_id').innerText='';
+            document.getElementById('ts_api_name').innerText='';
+            document.getElementById('ts_method').value='none';
+            document.getElementById('ts_url').value='';
+            document.getElementById('ts_host').value='';
+            document.getElementById('ts_header').value='{}';
+            //开始初始化请求编码格式部分：
+            document.getElementById('click_none').click(); //点击none子标签
+            document.getElementById('mytbody').innerHTML='<tr><td></td><td></td></tr>';
+            document.getElementById('mytbody2').innerHTML='<tr><td></td><td></td></tr>';
+            document.getElementById('raw_Text').value='';
+            document.getElementById('raw_JavaScript').value='';
+            document.getElementById('raw_Json').value='';
+            document.getElementById('raw_Html').value='';
+            document.getElementById('raw_Xml').value= ''
+
+            //返回体清空
+            document.getElementById('ts_response_body').value='';
+        }
         function ts_show(id,name) {
+            clear_ts_api();
             document.getElementById('ts').style.display='block';
             document.getElementById('ts_api_id').innerText=id;
             document.getElementById('ts_api_name').innerText=name;
@@ -287,7 +302,7 @@ color: white;padding-left: 10px">
                     ts_api_body.push([key,value])
                 }
 
-                console.log(ts_api_body)
+                ts_api_body = JSON.stringify(ts_api_body);
 
             }
             if(ts_body_method=='x-www-form-urlencoded'){
@@ -301,7 +316,7 @@ color: white;padding-left: 10px">
                     ts_api_body.push([key,value])
                 }
 
-                console.log(ts_api_body)
+               ts_api_body = JSON.stringify(ts_api_body);
 
             }
             if(ts_body_method=='Text'){
@@ -319,6 +334,21 @@ color: white;padding-left: 10px">
             if(ts_body_method=='Xml'){
                 var ts_api_body=document.getElementById('raw_Xml').value;
             }
+
+            var api_id = document.getElementById('ts_api_id').innerText; //获取接口ID
+
+            $.get('/Api_save/',{
+                'api_id':api_id,
+                'ts_method':ts_method,
+                'ts_url':ts_url,
+                'ts_host':ts_host,
+                'ts_header':ts_header,
+                'ts_body_method':ts_body_method,
+                'ts_api_body':ts_api_body
+
+            },function (ret) {
+                document.getElementById('ts').style.display='none';
+            })
 
         }
     </script>
