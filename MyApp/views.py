@@ -166,6 +166,7 @@ def delete_project(request):
     id = request.GET['id']
 
     DB_project.objects.filter(id=id).delete()
+    DB_apis.objects.filter(project_id=id).delete()
 
     return HttpResponse('')
 
@@ -276,6 +277,7 @@ def Api_save(request):
     :return:
     """
     api_id = request.GET['api_id']
+    api_name=request.GET['api_name']
     ts_method = request.GET['ts_method']
     ts_url = request.GET['ts_url']
     ts_host = request.GET['ts_host']
@@ -284,6 +286,7 @@ def Api_save(request):
     ts_api_body = request.GET['ts_api_body']
 
     DB_apis.objects.filter(id=api_id).update(
+        name = api_name,
         api_method = ts_method,
         api_url = ts_url,
         api_host = ts_host,

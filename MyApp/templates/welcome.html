@@ -42,7 +42,8 @@
 
         </nav>
 
-    <button id="menu_btn" onclick="display_menu()" style="margin-left: 220px">隐藏</button>
+    <button id="menu_btn" onclick="display_menu()" style="position: absolute;left: 188px;top: 48%;z-index: 999;
+    height: 35px;background-color: #353c48;color: white;border: 0;font-size: x-large"><</button>
 
     <script>
         function display_menu() {
@@ -50,32 +51,36 @@
             menu.style.display='none';
             btn = document.getElementById('menu_btn');
 
-            if (btn.innerText='隐藏'){
+            if (btn.innerText=='<'){
                 menu.style.display='none';
-                btn.style.marginLeft='0px';
-                btn.innerText='显示';
+                btn.style.left='0px';
+                btn.innerText='>';
             }else {
-                menu.style.display='bolck';
-                btn.style.marginLeft='217px';
-                btn.innerText='隐藏';
+                menu.style.display='block';
+                btn.style.left='188px';
+                btn.innerText='<';
             }
 
 
         }
     </script>
 
-    <div style="float: right;">
-        <a href="/home/">
-        <button style="height: 35px;
-    width: 100px;background-color: #353c48;color: white;font-size: large">🏠 主页</button>
-        </a>
-        <br>
-        <a href="/logout/">
-        <button style="height: 35px;
-    width: 100px;background-color: #353c48;color: white;border-radius: 0px 0px 0px 10px;font-size: large">退出</button>
-        </a>
+{#    <div style="float: right;">#}
+{#        <a href="/home/">#}
+{#        <button style="height: 35px;#}
+{#    width: 100px;background-color: #353c48;color: white;font-size: large">🏠 主页</button>#}
+{#        </a>#}
+{#        <br>#}
+{#        <a href="/logout/">#}
+{#        <button style="height: 35px;#}
+{#    width: 100px;background-color: #353c48;color: white;border-radius: 0px 0px 0px 10px;font-size: large">退出</button>#}
+{#        </a>#}
+{#    </div>#}
+    <div style="font-size: large;position: absolute;top: 0px;right: 0px;box-shadow: 4px 4px 8px grey;padding-left: 5px;padding-right: 5px">
+        <a href="/home/"style="color: #2daaff;text-decoration: none">主页</a>
+        <a href="/logout/"style="color: #2daaff;text-decoration: none">退出</a>
     </div>
-
+    <br>
 	<script src="/static/201908059658/js/jquery-1.11.0.min.js" type="text/javascript"></script>
     <script src="/static/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
         <!--include plugin js-->
