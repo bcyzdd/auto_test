@@ -125,7 +125,7 @@ color: white;padding-left: 10px">
                 <input id="ts_url" style="color: black;padding-left: 10px;width: 100%;height: 40px;" type="text" placeholder="url:如 /abcd/efg" value="">
             </li>
             <li>
-                <button type="button" style="height: 40px;width: 120px" class="btn btn-default"><span style="font-size: large">Send</span></button>
+                <button onclick="ts_send()" type="button" style="height: 40px;width: 120px" class="btn btn-default"><span style="font-size: large">Send</span></button>
             </li>
         </ul>
         <br>
@@ -448,6 +448,82 @@ color: white;padding-left: 10px">
             },function (ret) {
 {#                document.getElementById('ts').style.display='none';#}
                 document.location.reload()
+            })
+
+        }
+        function ts_send() {
+            var api_name = document.getElementById('ts_api_name').value;
+
+            var ts_method = document.getElementById('ts_method').value;
+            var ts_url = document.getElementById('ts_url').value;
+            var ts_host = document.getElementById('ts_host').value;
+            var ts_header = document.getElementById('ts_header').value;
+{#            alert(ts_method+ts_url+ts_host+ts_header)#}
+            var ts_body_method = $('ul#myTab li[class="active"]')[0].innerText;
+{#            alert(ts_body_method)#}
+            {# 通过jquery的简单代码来获取到 ul=mytab 下面所有li标签中class属性为active的那个li内的静态夹杂文案 #}
+            if(ts_body_method=='none'){
+                var ts_api_body=''
+            }
+            if(ts_body_method=='form-data'){
+                var ts_api_body=[];
+                var tbody_ = $('table#mytable tbody')[0] //获取该表格内容
+                var trlist = tbody_.children;
+                for(var i=0;i<trlist.length;i++){
+                    var tdarr = trlist[i].children;
+                    var key = tdarr[0].innerText;
+                    var value = tdarr[1].innerText;
+                    ts_api_body.push([key,value])
+                }
+
+                ts_api_body = JSON.stringify(ts_api_body);
+
+            }
+            if(ts_body_method=='x-www-form-urlencoded'){
+                var ts_api_body=[];
+                var tbody_ = $('table#mytable2 tbody')[0] //获取该表格内容
+                var trlist = tbody_.children;
+                for(var i=0;i<trlist.length;i++){
+                    var tdarr = trlist[i].children;
+                    var key = tdarr[0].innerText;
+                    var value = tdarr[1].innerText;
+                    ts_api_body.push([key,value])
+                }
+
+               ts_api_body = JSON.stringify(ts_api_body);
+
+            }
+            if(ts_body_method=='Text'){
+                var ts_api_body=document.getElementById('raw_Text').value;
+            }
+            if(ts_body_method=='JavaScript'){
+                var ts_api_body=document.getElementById('raw_JavaScript').value;
+            }
+            if(ts_body_method=='Json'){
+                var ts_api_body=document.getElementById('raw_Json').value;
+            }
+            if(ts_body_method=='Html'){
+                var ts_api_body=document.getElementById('raw_Html').value;
+            }
+            if(ts_body_method=='Xml'){
+                var ts_api_body=document.getElementById('raw_Xml').value;
+            }
+
+            var api_id = document.getElementById('ts_api_id').innerText; //获取接口ID
+
+            $.get('/Api_send/',{
+                'api_id':api_id,
+                'api_name':api_name,
+                'ts_method':ts_method,
+                'ts_url':ts_url,
+                'ts_host':ts_host,
+                'ts_header':ts_header,
+                'ts_body_method':ts_body_method,
+                'ts_api_body':ts_api_body
+
+            },function (ret) {
+                $('li a[href=#response]').click();
+                document.getElementById('ts_response_body').value = ret;
             })
 
         }
