@@ -1,6 +1,7 @@
 from django.shortcuts import render,HttpResponse,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+import json
 
 from MyApp.models import *
 
@@ -297,3 +298,16 @@ def Api_save(request):
     )
 
     return HttpResponse('success')
+
+def get_api_data(request):
+    """
+    获取接口数据
+    第一句是获取到前端过来的接口id
+    第二句是拿到这个接口的字典格式数据
+    第三句是返回给前端，但是数据要变成json串。
+    :param request:
+    :return:
+    """
+    api_id = request.GET['api_id']
+    api = DB_apis.objects.filter(id=api_id).values()[0]
+    return HttpResponse(json.dumps(api),content_type='application/json')

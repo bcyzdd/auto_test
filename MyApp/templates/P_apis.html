@@ -195,11 +195,11 @@ color: white;padding-left: 10px">
                 <button class="btn btn-default" id="add"><i class="fa fa-plus"></i> 添加新参数</button>
                 <script>window.jQuery || document.write('<script src="/static/201801271505/js/jquery-1.11.0.min.js"><\/script>')</script>
                 <script type="text/javascript" src="/static/201801271505/js/bootstable.js"></script>
-                <script type="text/javascript">
-                    $('#mytable').SetEditable({
-                        $addButton: $('#add'),
-                    });
-                </script>
+{#                <script type="text/javascript">#}
+{#                    $('#mytable').SetEditable({#}
+{#                        $addButton: $('#add'),#}
+{#                    });#}
+{#                </script>#}
             </div>
             <div class="tab-pane fade" id="x-www-form-urlencoded">
                 <div class="table-responsive" style="width: 98%;color: black">
@@ -222,11 +222,11 @@ color: white;padding-left: 10px">
                 <button class="btn btn-default" id="add2"><i class="fa fa-plus"></i> 添加新参数</button>
                 <script>window.jQuery || document.write('<script src="/static/201801271505/js/jquery-1.11.0.min.js"><\/script>')</script>
                 <script type="text/javascript" src="/static/201801271505/js/bootstable.js"></script>
-                <script type="text/javascript">
-                    $('#mytable2').SetEditable({
-                        $addButton: $('#add2'),
-                    });
-                </script>
+{#                <script type="text/javascript">#}
+{#                    $('#mytable2').SetEditable({#}
+{#                        $addButton: $('#add2'),#}
+{#                    });#}
+{#                </script>#}
             </div>
             <div class="tab-pane fade" id="Text">
                 <textarea name="" id="raw_Text" style="color: black;width: 98%;height: 300px"></textarea>
@@ -290,7 +290,28 @@ color: white;padding-left: 10px">
             clear_ts_api();
             document.getElementById('ts').style.display='block';
             document.getElementById('ts_api_id').innerText=id;
-            document.getElementById('ts_api_name').value=name;
+{#            document.getElementById('ts_api_name').value=name;#}
+
+            $.get('/get_api_data/',{
+                'api_id':id
+            },function (ret) {
+                console.log(ret);
+                //接收返回值后的动作
+                document.getElementById('ts_api_name').value=ret.name;
+                document.getElementById('ts_method').value=ret.api_method;
+                document.getElementById('ts_url').value=ret.api_url;
+                document.getElementById('ts_host').value=ret.api_host;
+                document.getElementById('ts_header').value=ret.api_header;
+
+                //请求体编码格式
+                var body_method = '#'+ret.body_method;
+                $('li a[href='+body_method+']').click();
+
+
+
+
+
+            })
         }
         function ts_close() {
             document.getElementById('ts').style.display='none';
