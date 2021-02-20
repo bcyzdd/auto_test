@@ -158,7 +158,7 @@ color: white;padding-left: 10px">
             </li>
             <li><a href="#form-data" data-toggle="tab">form-data</a></li>
             <li><a href="#x-www-form-urlencoded" data-toggle="tab">x-www-form-urlencoded</a></li>
-            <li class="drodown">
+            <li class="dropdown">
                 <a href="#" class="dropwoen-toggle" data-toggle="dropdown">raw <b class="caret"></b> </a>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
                     <li><a href="#Text" tabindex="-1" data-toggle="tab">Text</a></li>
@@ -282,7 +282,7 @@ color: white;padding-left: 10px">
             )
             $('#mytable2').SetEditable(
                     {
-                        $addButton:$('#add'),
+                        $addButton:$('#add2'),
                     }
             )
         }
@@ -306,7 +306,65 @@ color: white;padding-left: 10px">
                 //请求体编码格式
                 var body_method = '#'+ret.body_method;
                 $('li a[href='+body_method+']').click();
+                //请求体显示
+                if(ret.body_method=='Text'){
+                    document.getElementById('raw_Text').value = ret.api_body;
+                }
 
+                if(ret.body_method=='JavaScript'){
+                    document.getElementById('raw_JavaScript').value = ret.api_body;
+                }
+
+                if(ret.body_method=='Json'){
+                    document.getElementById('raw_Json').value = ret.api_body;
+                }
+
+                if(ret.body_method=='Html'){
+                    document.getElementById('raw_Html').value = ret.api_body;
+                }
+
+                if(ret.body_method=='Xml'){
+                    document.getElementById('raw_Xml').value = ret.api_body;
+                }
+                // 给这个表格进行初始化，清除掉旧数据
+                //拿到请求体列表，作为循环主体
+                //遍历这个请求体列表，获取每一对key-value，然后我们获取表格的所有子标签，也就是获取到一堆tr，和tr内部的一对td
+                //然后tr的下标就是我们遍历这个循环的下标，td应该只有2个，第一个放key，第二个放value，我们对其分别赋值，值就是从这个请求体列表拿到的
+                //最后我们别忘了代码要点击一下这个表格的新增参数按钮
+                //
+                if(ret.body_method=='form-data'){
+                    var tbody = document.getElementById('mytbody');//定位表格中的tbody部分
+                    body = eval(ret.api_body);//把字符串转请求体转化成列表
+                    for(var i=0;i<body.length;i++){//遍历这个请求体列表
+                        key = body[i][0];//拿出每一个键值对的key
+                        value = body[i][1];//拿出每一个键值对的value
+                        var childs_tr = tbody.children;//获取这个表格下所有的tr组成的大列表
+                        //每个tr下的children得到的是 td列表，只有2个td
+                        childs_tr[i].children[0].innerText=key;// 第一个td放key
+                        childs_tr[i].children[1].innerText=value;//第二个td放value
+                        // 判断是否最后一次遍历，来决定是否点击新增参数按钮
+                        if(i<body.length-1){//
+                            document.getElementById('add').click()//
+                        }
+                    }
+                }
+
+                if(ret.body_method=='x-www-form-urlencoded'){
+                    var tbody = document.getElementById('mytbody2');//定位表格中的tbody部分
+                    body = eval(ret.api_body);//把字符串转请求体转化成列表
+                    for(var i=0;i<body.length;i++){//遍历这个请求体列表
+                        key = body[i][0];//拿出每一个键值对的key
+                        value = body[i][1];//拿出每一个键值对的value
+                        var childs_tr = tbody.children;//获取这个表格下所有的tr组成的大列表
+                        //每个tr下的children得到的是 td列表，只有2个td
+                        childs_tr[i].children[0].innerText=key;// 第一个td放key
+                        childs_tr[i].children[1].innerText=value;//第二个td放value
+                        // 判断是否最后一次遍历，来决定是否点击新增参数按钮
+                        if(i<body.length-1){//
+                            document.getElementById('add2').click()//
+                        }
+                    }
+                }
 
 
 
