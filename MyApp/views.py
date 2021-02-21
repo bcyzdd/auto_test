@@ -2,6 +2,7 @@ from django.shortcuts import render,HttpResponse,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 import json
+import requests
 
 from MyApp.models import *
 
@@ -354,4 +355,39 @@ def Api_send(request):
         api.update(last_body_method=ts_body_method,last_api_body=ts_api_body)
     # 发送请求返回值
 
-    return HttpResponse('{"code":200}')
+    header = json.loads(ts_header) #将字符串转化为json
+    if ts_host[-1]=='/' and ts_url[0]=='/':
+        url = ts_host[:-1]+ts_url
+    elif ts_host[-1] !='/' and ts_url[0] !='/':
+        url = ts_host +'/'+ts_url
+    else:
+        url = ts_host + ts_url
+
+    if ts_body_method=='none':
+        response = requests.request(ts_body_method.upper(),url,headers=header,data={})
+    elif ts_body_method=='form-data':
+        files=[]
+        payload = {}
+        for i in eval(ts_api_body):
+            payload[i[0]]=i[1]
+        response = requests.request(ts_body_method.upper(),url,headers=header,data=payload,files=files)
+    elif ts_body_method=='x-www-form-urlencoded':
+        header['Content-Type']='application/x-www-form-urlencoded'
+        payload={}
+        for i in eval(ts_api_body):
+            payload[i[0]]=i[1]
+        response = requests.request(ts_body_method.upper(),url,headers=header,data=payload)
+    else:
+        if ts_body_method=='Text':
+            header['Content-Type']='text/plain'
+        if ts_body_method=='JavaScript':
+            header['Content-Type'] = 'text/plain'
+        if ts_body_method=='Json':
+            header['Content-Type'] = 'text/plain'
+        if ts_body_method=='Html':
+            header['Content-Type'] = 'text/plain'
+        if ts_body_method=='Xml':
+            header['Content-Type'] = 'text/plain'
+        response = requests.request(ts_body_method.upper(),url,headers=header,data=ts_api_body.encode('utf-8'))
+
+    return HttpResponse(response.text)
