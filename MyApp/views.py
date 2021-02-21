@@ -389,6 +389,8 @@ def Api_send(request):
         if ts_body_method=='Xml':
             header['Content-Type'] = 'text/plain'
         response = requests.request(ts_body_method.upper(),url,headers=header,data=ts_api_body.encode('utf-8'))
+    #把返回值传递到前端页面
+    response.encoding='utf-8'
 
     return HttpResponse(response.text)
 
