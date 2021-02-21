@@ -391,3 +391,36 @@ def Api_send(request):
         response = requests.request(ts_body_method.upper(),url,headers=header,data=ts_api_body.encode('utf-8'))
 
     return HttpResponse(response.text)
+
+def copy_api(request):
+    """
+    复制接口
+    :param request:
+    :return:
+    """
+    api_id = request.GET['api_id']
+
+    # 开始复制
+    old_api = DB_apis.objects.filter(id=api_id)[0]
+
+    DB_apis.objects.create(project_id=old_api.project_id,
+                           name = old_api.name+'_副本',
+                           api_method = old_api.api_method,
+                           api_url = old_api.api_url,
+                           api_header = old_api.api_header,
+                           api_login = old_api.api_login,
+                           api_host = old_api.api_host,
+                           desc = old_api.desc,
+                           body_method = old_api.body_method,
+                           api_body = old_api.api_body,
+                           result = old_api.result,
+                           sign = old_api.sign,
+                           file_key = old_api.file_key,
+                           file_name = old_api.file_name,
+                           public_header = old_api.public_header,
+                           last_body_method = old_api.last_body_method,
+                           last_api_body = old_api.last_api_body,
+                           )
+
+    #返回
+    return HttpResponse('')

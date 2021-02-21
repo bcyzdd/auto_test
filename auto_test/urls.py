@@ -43,7 +43,8 @@ urlpatterns = [
     url(r'^get_bz/$', get_bz),# 获取备注
     url(r'^Api_save/$', Api_save),# 保存接口
     url(r'^get_api_data/$', get_api_data),# 获取接口信息
-    url(r'^Api_send/$', Api_send),# 获取接口信息
+    url(r'^Api_send/$', Api_send),# 接口请求
+    url(r'^copy_api/$', copy_api),# 复制接口
 
 
 
