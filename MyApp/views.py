@@ -234,7 +234,7 @@ def project_api_add(request,Pid):
     :return:
     """
     project_id = Pid
-    DB_apis.objects.create(project_id=project_id)
+    DB_apis.objects.create(project_id=project_id,api_method='none')
     return HttpResponseRedirect('/apis/%s/'%project_id)
 
 def project_api_del(request,id):

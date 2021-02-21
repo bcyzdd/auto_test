@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <style>
-        .wqrf_button{
-            background-color: #0fd1ab;
-            border-radius: 5px;
-            border: 1px solid #353C48;
-            box-shadow: 4px 4px 4px grey;
-        }
-    </style>
+{#    <style>#}
+{#        .wqrf_button{#}
+{#            background-color: #0fd1ab;#}
+{#            border-radius: 5px;#}
+{#            border: 1px solid #353C48;#}
+{#            box-shadow: 4px 4px 4px grey;#}
+{#        }#}
+{#    </style>#}
 </head>
 <body>
     <nav class="navbar navbar-default" role="navigation" style="position: absolute;top: 0px;left: 80px;width:-webkit-calc(100% - 200px);z-index: 1">
@@ -47,9 +47,9 @@
                 <td>{{ i.api_url }}</td>
                 <td>
                     <button onclick="ts_show('{{ i.id }}','{{ i.name }}')" class="btn btn-success">调试</button>
-                    <button onclick="open_bz('{{ i.id }}')" class="wqrf_button">备注</button>
-                    <button class="wqrf_button">复制</button>
-                    <button class="wqrf_button">异常值测试</button>
+                    <button onclick="open_bz('{{ i.id }}')" class="btn btn-default">备注</button>
+                    <button class="btn btn-default">复制</button>
+                    <button class="btn btn-default">异常值测试</button>
                     <button onclick="document.location.href='/project_api_del/{{ i.id }}/'" class="btn btn-danger">删除</button>
                 </td>
 
@@ -103,7 +103,7 @@
         }
     </script>
     {# 调试弹窗及函数 #}
-    <div id="ts" style="display: none;border-radius: 5px;width: 80%;position: fixed;left: 10%;background-color: #3c4043;box-shadow: 4px 4px 8px grey;
+    <div id="ts" style="display: none;border-radius: 5px;width: 80%;position: absolute;left: 10%;background-color: #3c4043;box-shadow: 4px 4px 8px grey;
 color: white;padding-left: 10px">
         <div class="btn-group" style="float: right">
             <button onclick="ts_save()" type="button" class="btn btn-success">保存</button>
@@ -111,7 +111,7 @@ color: white;padding-left: 10px">
         </div>
 {#        <h3>接口：<small style="color: greenyellow" id="ts_api_id"></small>-<small style="color: greenyellow" id="ts_api_name"></small></h3>#}
         <h4>接口： <small style="color: greenyellow" id="ts_api_id"></small>
-            <small>-<input type="text" id="ts_api_name" style="padding-left: 5px;width: 50%;color: #329104"></small></h4>
+            <small>-<input placeholder="请输入接口名称" type="text" id="ts_api_name" style="padding-left: 5px;width: 50%;color: #329104"></small></h4>
         <ul class="nav navbar-nav" style="width: 98%">
             <li>
                 <select id="ts_method" style="height: 40px;" class="form-control">
@@ -372,7 +372,8 @@ color: white;padding-left: 10px">
             })
         }
         function ts_close() {
-            document.getElementById('ts').style.display='none';
+{#            document.getElementById('ts').style.display='none';#}
+            document.location.reload()
         }
         function ts_save() {
             var api_name = document.getElementById('ts_api_name').value;
