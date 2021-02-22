@@ -435,6 +435,7 @@ def error_request(request):
     """
     api_id = request.GET['api_id']
     new_body = request.GET['new_body']
+    span_text = request.GET['span_text']
     #
     # print(new_body)
     api = DB_apis.objects.filter(id=api_id)[0]
@@ -451,25 +452,29 @@ def error_request(request):
     else:
         url = host + url
 
-    if body_method == 'form-data':
-        files = []
-        payload = {}
-        print(eval(new_body))
-        for i in eval(new_body):
-            payload[i[0]] = i[1]
-        response = requests.request(method.upper(), url, headers=header, data=payload, files=files)
-    elif body_method == 'x-www-form-urlencoded':
-        header['Content-Type'] = 'application/x-www-form-urlencoded'
-        payload = {}
-        for i in eval(new_body):
-            payload[i[0]] = i[1]
-        response = requests.request(method.upper(), url, headers=header, data=payload)
-    elif body_method == 'Json':
-        header['Content-Type'] ='text/plain'
-        response = requests.request(method.upper(), url, headers=header, data=new_body.encode('utf-8'))
-    else:
-        return HttpResponse('非法的请求体类型')
-    # 把返回值传递到前端页面
-    response.encoding = 'utf-8'
-
-    return HttpResponse(response.text)
+    try:
+        if body_method == 'form-data':
+            files = []
+            payload = {}
+            print(eval(new_body))
+            for i in eval(new_body):
+                payload[i[0]] = i[1]
+            response = requests.request(method.upper(), url, headers=header, data=payload, files=files)
+        elif body_method == 'x-www-form-urlencoded':
+            header['Content-Type'] = 'application/x-www-form-urlencoded'
+            payload = {}
+            for i in eval(new_body):
+                payload[i[0]] = i[1]
+            response = requests.request(method.upper(), url, headers=header, data=payload)
+        elif body_method == 'Json':
+            header['Content-Type'] = 'text/plain'
+            response = requests.request(method.upper(), url, headers=header, data=new_body.encode('utf-8'))
+        else:
+            return HttpResponse('非法的请求体类型')
+        # 把返回值传递到前端页面
+        response.encoding = 'utf-8'
+        res_json = {"response":response.text,"span_text":span_text}
+        return HttpResponse(json.dumps(res_json),content_type='application/json')
+    except:
+        res_json = {"response": '对不起，接口未通！', "span_text": span_text}
+        return HttpResponse(json.dumps(res_json),content_type='application/json')
