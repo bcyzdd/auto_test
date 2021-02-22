@@ -569,3 +569,14 @@ def get_home_log(request):
     all_logs= DB_apis_log.objects.filter(user_id=user_id)
     ret ={'all_logs':list(all_logs.values('id','api_method','api_host','api_url'))[::-1]}
     return HttpResponse(json.dumps(ret),content_type='application/json')
+
+def get_api_log_home(request):
+    """
+    获取完整的单一的请求记录数据
+    :param request:
+    :return:
+    """
+    log_id = request.GET['log_id']
+
+    # 接口测试平台代码实现58-首页重构6
+    return HttpResponse()
