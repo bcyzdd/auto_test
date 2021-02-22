@@ -579,5 +579,4 @@ def get_api_log_home(request):
     log_id = request.GET['log_id']
 
     # 接口测试平台代码实现58-首页重构6
-    # ddd
     return HttpResponse()
