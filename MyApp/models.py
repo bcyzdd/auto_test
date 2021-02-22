@@ -70,3 +70,20 @@ class DB_apis(models.Model):
     last_api_body = models.CharField(max_length=1000,null=True) # 请求体
     def __str__(self):
         return self.name
+
+class DB_apis_log(models.Model):
+    user_id= models.CharField(max_length=10,null=True) # 所属用户id
+    api_method= models.CharField(max_length=10,null=True) # 接口请求方式
+    api_url= models.CharField(max_length=1000,null=True) # 接口url
+    api_header= models.CharField(max_length=1000,null=True) # 请求头
+    api_login= models.CharField(max_length=10,null=True) # 是否带登录态
+    api_host= models.CharField(max_length=100,null=True)# 域名
+    body_method= models.CharField(max_length=20,null=True) # 请求体编码
+    api_body= models.CharField(max_length=1000,null=True) # 请求体
+    sign= models.CharField(max_length=1000,null=True)# 是否验签
+    file_key= models.CharField(max_length=1000,null=True)# 文件key
+    file_name= models.CharField(max_length=1000,null=True)# 文件名
+
+
+    def __str__(self):
+        return self.api_url

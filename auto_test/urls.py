@@ -46,6 +46,8 @@ urlpatterns = [
     url(r'^Api_send/$', Api_send),# 接口请求
     url(r'^copy_api/$', copy_api),# 复制接口
     url(r'^error_request/$', error_request),# 异常值测试
+    url(r'^Api_send_home/$', Api_send_home),# 首页发送请求
+    url(r'^get_home_log/$', get_home_log),# 获取最新请求记录
 
 
 
