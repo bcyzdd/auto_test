@@ -591,7 +591,7 @@ color: white;padding-left: 10px">
         <h4>接口：<small style="color: #0dff00" id="error_api_name"></small> 的异常值测试结果如下：</h4>
 
         <strong>待替换数据:(英文逗号隔开)</strong>
-        <input id="ready_error_data" type="text" style="border-radius: 5px;color: black;width: 99%" value="'a','123','',',','./?*&~','中文'">
+        <input id="ready_error_data" type="text" style="border-radius: 5px;color: black;width: 99%" value="'a',123,'',' ','./?*&~','中文'">
         <br><br>
 
         <span>替换：username -> 123</span>
@@ -610,18 +610,55 @@ color: white;padding-left: 10px">
     <script>
         function error_play() {
             api_body = document.getElementById('error_api_body').value;
+            api_id = document.getElementById('error_api_name').innerText;
             ready_error_data = document.getElementById('ready_error_data').value;
 
-            console.log(api_body);
+            //将预替换的数据从一个大字符串，按逗号,解析成数组
+            var r = ready_error_data.split(',');
+{#            console.log(r);#}
             //判断是不是form-data/x-www-form-urlencoded的二维数组格式
             try {
                 var s = eval(api_body);
-                console.log(s)
+                if(s instanceof Array){
+                    console.log('这是数组');
+                    for(var i=0;i<s.length;i++){// 第一层 判断一共请求体有几个参数进行几次大循环
+                        for(var j=0;j<r.length;j++){
+                            var new_body = [];//不在基础数据s上进行替换，复制一个副本，在副本上进行替换，每次循环后副本都会被重置，保证每次替换正确
+                            $.extend(true,new_body,s); //代码中的深拷贝是jquery的方法：$.extend(true,新,旧)
+                            new_body[i][1]=eval(r[j]); //循环替换每个元素的值
+                            console.log(new_body)
+                            $.get('/error_request/',{
+                                'api_id':api_id,
+                                'new_body':JSON.stringify(new_body)
+                            },function (ret) {
+
+                            })
+                        }
+                    }
+                }else {
+                    console.log('这是none');
+                    alert('当前请求体不含任何内容！');
+                }
             }catch (e){
                 //若不是就继续判断是不是raw-json的json串格式
                 try {
                     var s = JSON.parse(api_body);
-                console.log(s)
+                    console.log(s);
+                    console.log('这是字典json');
+                    for(var i in s){
+                        for(var j=0;j<r.length;J++){
+                            var new_body = {};
+                            $.extend(true,new_body,s);
+                            new_body[i]=eval(r[j]);
+                            console.log(new_body)
+                            $.get('/error_request/',{
+                                'api_id':api_id,
+                                'new_body':JSON.stringify(new_body)
+                            },function (ret) {
+
+                            })
+                        }
+                    }
                 }catch (e){
                     //若也不是，那就不需要做异常值测试了
                     alert('当前接口的请求类型不支持异常值测试！')
@@ -649,7 +686,7 @@ color: white;padding-left: 10px">
             '<h4>接口：<small style="color: #0dff00" id="error_api_name"></small> 的异常值测试结果如下：</h4>\n'+
             '<strong>待替换数据:(英文逗号隔开)</strong>\n'+
             '<input id="ready_error_data" type="text" style="border-radius: 5px;color: black;width: 99%"\n'+
-            'value="\'a\',123,\'\',\',\',\'./?*&~\',\'中文\'"\n'+
+            'value="\'a\',123,\'\',\' \',\'./?*&~\',\'中文\'"\n'+
             '><br><br>'
 
         }
