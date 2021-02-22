@@ -576,12 +576,17 @@ color: white;padding-left: 10px">
 
     <div id="error_div" style="display: none;border-radius:5px;width: 80%;position: absolute;left: 10%;top: 10%;
     background-color: #3c4043;box-shadow: 4px 4px 8px grey;color: white;padding-left: 10px ">
-        <h4>接口： <small id="error_api_name"></small>的异常值测试结果如下：</h4>
+
+        <div class="btn-group" style="float: right">
+            <button onclick="" class="btn btn-success">开始测试</button>
+            <button onclick="error_close()" class="btn btn-default">关闭</button>
+        </div>
+
+        <h4>接口：<small style="color: #0dff00" id="error_api_name"></small> 的异常值测试结果如下：</h4>
 
         <strong>待替换数据:(英文逗号隔开)</strong>
         <input id="ready_error_data" type="text" style="border-radius: 5px;color: black;width: 99%" value="'a','123','',',','./?*&~','中文'">
-        <br>
-        <br>
+        <br><br>
 
         <span>替换：username -> 123</span>
         <textarea style="width: 99%;height: 50px;border-radius: 5px;color: black"></textarea>
@@ -595,7 +600,24 @@ color: white;padding-left: 10px">
     </div>
     <script>
         function error_test(api_id,api_body) {
+            error_clean();
             document.getElementById('error_div').style.display='block';
+            document.getElementById('error_api_name').innerText=api_id;
+        }
+        function error_close() {
+            document.getElementById('error_div').style.display='none';
+        }
+        function error_clean() {
+            document.getElementById('error_div').innerHTML=' <div class="btn-group" style="float: right">\n' +
+            '<button onclick="" class="btn btn-success">开始测试</button>\n' +
+            '<button onclick="error_close()" class="btn btn-default">关闭</button></div>\n' +
+            '<h4>接口：<small style="color: #0dff00" id="error_api_name"></small> 的异常值测试结果如下：</h4>\n'+
+            '<strong>待替换数据:(英文逗号隔开)</strong>\n'+
+            '<input id="ready_error_data" type="text" style="border-radius: 5px;color: black;width: 99%"\n'+
+            'value="\'a\',123,\'\',\',\',\'./?*&~\',\'中文\'"\n'+
+            '><br><br>'
+
+            document.getElementById('error_div').innerHTML='';
         }
     </script>
 </body>
