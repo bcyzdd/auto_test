@@ -23,7 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^welcome/$', welcome),# 获取菜单
     url(r'^home/$', home),# 进入首页
-    url(r'^child/(?P<eid>.+)/(?P<oid>.*)/$', child),# 返回子页面
+    url(r'^child/(?P<eid>.+)/(?P<oid>.*)/(?P<ooid>.*)/$', child),# 返回子页面
     url(r'^login/$', login),# 登陆
     url(r'^login_action/$', login_action),# 登陆
     url(r'^register_action/$', register_action),# 注册
@@ -49,6 +49,7 @@ urlpatterns = [
     url(r'^Api_send_home/$', Api_send_home),# 首页发送请求
     url(r'^get_home_log/$', get_home_log),# 获取最新请求记录
     url(r'^get_api_log_home/$', get_api_log_home),# 获取完整的单一请求记录数据
+    url(r'^home_log/(?P<log_id>.*)$', home),# 再次进入首页，这次要带着请求记录
 
 
 
