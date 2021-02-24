@@ -614,10 +614,3 @@ def get_api_log_home(request):
     # print(ret)
     return HttpResponse(json.dumps(ret), content_type='application/json')
 
-
-def home_log(request):
-    """
-    
-    :param request:
-    :return:
-    """
